@@ -30,7 +30,7 @@ Nodemon
 ## Installation
 
 Clone this repo
-Run `npm install.
+Run `npm install`
 Change the URL in src/App.js to your own API backend.
 Run `npm run dev`
 
