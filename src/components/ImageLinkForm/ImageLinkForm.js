@@ -5,9 +5,12 @@ function ImageLinkForm({ onInputChange, onButtonSubmit }) {
 	return (
 		<>
 			<div className='pt-8 z-30'>
-				<p className='text-2xl text-white z-30'>
-					This Magic Brain will detect faces in your pictures. Give it a try!
-				</p>
+				<div className='flex justify-center'>
+					<p className='text-2xl text-white z-30'>
+						This Magic Brain will detect faces in your pictures. Give it a try!
+					</p>
+				</div>
+
 				<div className='flex justify-center z-30'>
 					<div className='pt-4 flex content-center justify-center max-w-5xl w-full mx-2'>
 						<input

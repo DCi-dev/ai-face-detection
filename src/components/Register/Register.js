@@ -1,8 +1,10 @@
 // Utilities
 import React from "react";
 import { useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 
 import { Form, FormGroup, Label, Input, Button, Card } from "reactstrap";
+import { useAuth } from "../../common/Auth/Auth";
 
 function Register({ onRouteChange, loadUser }) {
 	// useState
@@ -20,23 +22,17 @@ function Register({ onRouteChange, loadUser }) {
 	const onPasswordChange = (event) => {
 		setPassword(event.target.value);
 	};
-	const onSubmitSignIn = () => {
-		fetch("http://localhost:3000/signin", {
-			method: "post",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({
-				email: email,
-				password: password,
-				name: name,
-			}),
-		})
-			.then((response) => response.json())
-			.then((user) => {
-				if (user.id) {
-					loadUser(user);
-					onRouteChange("home");
-				}
-			});
+
+	const auth = useAuth();
+	const navigate = useNavigate();
+	const location = useLocation();
+
+	const redirectPath = location.state?.path || "/dashboard";
+
+	const handleRegister = (event) => {
+		event.preventDefault();
+		auth.register(name, email, password);
+		navigate(redirectPath, { replace: true });
 	};
 
 	return (
@@ -84,7 +80,7 @@ function Register({ onRouteChange, loadUser }) {
 						<div className='flex-col flex justify-between items-center'>
 							<Button
 								className='mt-4 bg-gray-700 text-black	w-24 mb-4'
-								onClick={onSubmitSignIn}
+								onClick={handleRegister}
 								type='submit'
 								value='Register'>
 								Register

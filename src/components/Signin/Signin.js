@@ -1,11 +1,12 @@
 // Utilities
 import React from "react";
 import { useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 
 import { Form, FormGroup, Label, Input, Button, Card } from "reactstrap";
+import { useAuth } from "../../common/Auth/Auth";
 
-function Signin({ onRouteChange, loadUser }) {
-	// useState
+function Signin() {
 	const [signInEmail, setSignInEmail] = useState("");
 	const [signInPassword, setSignInPassword] = useState("");
 
@@ -15,22 +16,17 @@ function Signin({ onRouteChange, loadUser }) {
 	const onPasswordChange = (event) => {
 		setSignInPassword(event.target.value);
 	};
-	const onSubmitSignIn = () => {
-		fetch("http://localhost:3000/signin", {
-			method: "post",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({
-				email: signInEmail,
-				password: signInPassword,
-			}),
-		})
-			.then((response) => response.json())
-			.then((user) => {
-				if (user.id) {
-					loadUser(user);
-					onRouteChange("home");
-				}
-			});
+
+	const auth = useAuth();
+	const navigate = useNavigate();
+	const location = useLocation();
+
+	const redirectPath = location.state?.path || "/dashboard";
+
+	const handleLogin = (event) => {
+		event.preventDefault();
+		auth.login(signInEmail, signInPassword);
+		navigate(redirectPath, { replace: true });
 	};
 
 	return (
@@ -66,18 +62,16 @@ function Signin({ onRouteChange, loadUser }) {
 						<div className='flex-col flex justify-between items-center'>
 							<Button
 								className='mt-4 bg-gray-700 text-black	w-24'
-								onClick={onSubmitSignIn}
+								onClick={handleLogin}
 								type='submit'
 								value='Sign in'>
 								Submit
 							</Button>
-							<Button
-								className='mt-4 text-black	mb-4 w-24'
-								onClick={() => onRouteChange("register")}>
-								Register
-							</Button>
 						</div>
 					</Form>
+					<Button className='mt-4 mx-auto text-black	mb-4 w-24' href='/register'>
+						Register
+					</Button>
 				</Card>
 			</div>
 		</>
