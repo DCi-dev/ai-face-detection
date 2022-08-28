@@ -107,14 +107,6 @@ function App() {
 						<Route index element={<Home />} />
 						<Route path='register' element={<RegisterView />} />
 						<Route path='signin' element={<Home />} />
-						{/* <Route
-							path='dashboard'
-							element={
-								<RequireAuth>
-									<Dashboard />
-								</RequireAuth>
-							}
-						/>*/}
 						<Route element={<RequireAuth />}>
 							<Route path='dashboard' element={<Dashboard />} exact />
 						</Route>

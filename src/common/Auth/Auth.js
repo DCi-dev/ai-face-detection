@@ -5,6 +5,10 @@ const AuthContext = createContext(null);
 export const AuthProvider = ({ children }) => {
 	const [user, setUser] = useState(null);
 
+	const entries = (user) => {
+		setUser(user);
+	};
+
 	const login = async (signInEmail, signInPassword) => {
 		const response = await fetch("http://localhost:3000/signin", {
 			method: "post",
@@ -42,7 +46,7 @@ export const AuthProvider = ({ children }) => {
 		setUser(null);
 	};
 	return (
-		<AuthContext.Provider value={{ user, login, register, logout }}>
+		<AuthContext.Provider value={{ user, entries, login, register, logout }}>
 			{children}
 		</AuthContext.Provider>
 	);
