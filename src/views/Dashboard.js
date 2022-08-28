@@ -9,7 +9,7 @@ function Dashboard() {
 	// useState
 	const [input, setInput] = useState("");
 	const [imageUrl, setImageUrl] = useState("");
-	const [box, setBox] = useState({});
+	const [boxes, setBoxes] = useState([]);
 
 	// Capture inputs
 	const onInputChange = (event) => {
@@ -36,7 +36,7 @@ function Dashboard() {
 						{
 							data: {
 								image: {
-									url: `${imageUrl}`,
+									url: `${input}`,
 								},
 							},
 						},
@@ -53,21 +53,23 @@ function Dashboard() {
 
 	// Face location box
 	const calculateFaceLocation = (data) => {
-		const clarifaiFace =
-			data.outputs[0].data.regions[0].region_info.bounding_box;
 		const image = document.getElementById("inputImage");
 		const width = Number(image.width);
 		const height = Number(image.height);
-		return {
-			leftCol: clarifaiFace.left_col * width,
-			topRow: clarifaiFace.top_row * height,
-			rightCol: width - clarifaiFace.right_col * width,
-			bottomRow: height - clarifaiFace.bottom_row * height,
-		};
+
+		return data.outputs[0].data.regions.map((face) => {
+			const clarifaiFace = face.region_info.bounding_box;
+			return {
+				leftCol: clarifaiFace.left_col * width,
+				topRow: clarifaiFace.top_row * height,
+				rightCol: width - clarifaiFace.right_col * width,
+				bottomRow: height - clarifaiFace.bottom_row * height,
+			};
+		});
 	};
 
-	const displayFaceBox = (box) => {
-		setBox(box);
+	const displayFaceBox = (boxes) => {
+		setBoxes(boxes);
 	};
 
 	return (
@@ -80,7 +82,7 @@ function Dashboard() {
 					onButtonSubmit={onButtonSubmit}
 				/>
 
-				<FaceRecognition imageUrl={imageUrl} box={box} />
+				<FaceRecognition imageUrl={imageUrl} boxes={boxes} />
 			</div>
 		</>
 	);
