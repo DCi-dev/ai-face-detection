@@ -22,32 +22,13 @@ function Dashboard() {
 
 	const onButtonSubmit = () => {
 		setImageUrl(input);
-		fetch(
-			`https://api.clarifai.com/v2/models/face-detection/versions/45fb9a671625463fa646c3523a3087d5/outputs`,
-			// Api settings
-			{
-				method: "POST",
-				headers: {
-					Accept: "application/json",
-					Authorization: "Key 3c290d71e7ec49839a69f5e1c407486d",
-				},
-				body: JSON.stringify({
-					user_app_id: {
-						user_id: "cdi",
-						app_id: "facial-recognition",
-					},
-					inputs: [
-						{
-							data: {
-								image: {
-									url: `${input}`,
-								},
-							},
-						},
-					],
-				}),
-			}
-		)
+		fetch("http://localhost:3000/imageurl", {
+			method: "post",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({
+				input: input,
+			}),
+		})
 			.then((response) => response.json())
 			.then((response) => {
 				if (response) {
