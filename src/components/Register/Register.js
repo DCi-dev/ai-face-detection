@@ -32,17 +32,19 @@ function Register({ onRouteChange, loadUser }) {
 	const handleRegister = (event) => {
 		event.preventDefault();
 		auth.register(name, email, password);
-		navigate(redirectPath, { replace: true });
+		if (email && password) {
+			navigate(redirectPath, { replace: true });
+		}
 	};
 
 	return (
 		<>
-			<div className='flex justify-center'>
-				<Card className='mt-20 w-11/12 max-w-2xl shadow-2xl'>
-					<p className='text-4xl mt-4'>Register</p>
+			<div className='flex justify-center h-screen'>
+				<Card className='my-auto w-11/12 max-w-2xl shadow-2xl bg-black/75'>
+					<p className='text-4xl mt-4 mx-auto text-white'>Register</p>
 					<Form id='sign_up' inline className='w-11/12 mx-auto mt-4'>
 						<FormGroup className='mb-2 me-sm-2 mb-sm-0'>
-							<Label className='me-sm-2' for='name'>
+							<Label className='me-sm-2 text-white' for='name'>
 								Name
 							</Label>
 							<Input
@@ -54,7 +56,7 @@ function Register({ onRouteChange, loadUser }) {
 							/>
 						</FormGroup>
 						<FormGroup className='mb-2 me-sm-2 mb-sm-0'>
-							<Label className='me-sm-2' for='email-adress'>
+							<Label className='me-sm-2 mt-2 text-white' for='email-adress'>
 								Email
 							</Label>
 							<Input
@@ -66,7 +68,7 @@ function Register({ onRouteChange, loadUser }) {
 							/>
 						</FormGroup>
 						<FormGroup className='mb-2 me-sm-2 mb-sm-0'>
-							<Label className='me-sm-2' for='password'>
+							<Label className='me-sm-2 mt-2 text-white' for='password'>
 								Password
 							</Label>
 							<Input
@@ -79,7 +81,7 @@ function Register({ onRouteChange, loadUser }) {
 						</FormGroup>
 						<div className='flex-col flex justify-between items-center'>
 							<Button
-								className='mt-4 bg-gray-700 text-black	w-24 mb-4'
+								className='mt-4 bg-white text-black	w-24 mb-4'
 								onClick={handleRegister}
 								type='submit'
 								value='Register'>

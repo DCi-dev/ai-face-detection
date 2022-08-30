@@ -26,17 +26,19 @@ function Signin() {
 	const handleLogin = (event) => {
 		event.preventDefault();
 		auth.login(signInEmail, signInPassword);
-		navigate(redirectPath, { replace: true });
+		if (signInEmail && signInPassword) {
+			navigate(redirectPath, { replace: true });
+		}
 	};
 
 	return (
 		<>
-			<div className='flex justify-center'>
-				<Card className='mt-20 w-11/12 max-w-2xl shadow-2xl'>
-					<p className='text-4xl mt-4'>Sign in</p>
+			<div className='flex justify-center h-screen'>
+				<Card className='my-auto w-11/12 max-w-2xl shadow-2xl bg-black/75'>
+					<p className='text-4xl mt-4 mx-auto text-white'>Sign in</p>
 					<Form id='sign_up' inline className='w-11/12 mx-auto mt-4'>
 						<FormGroup className='mb-2 me-sm-2 mb-sm-0'>
-							<Label className='me-sm-2' for='email'>
+							<Label className='me-sm-2 text-white' for='email'>
 								Email
 							</Label>
 							<Input
@@ -48,7 +50,7 @@ function Signin() {
 							/>
 						</FormGroup>
 						<FormGroup className='mb-2 me-sm-2 mb-sm-0'>
-							<Label className='me-sm-2' for='password'>
+							<Label className='me-sm-2 text-white mt-2' for='password'>
 								Password
 							</Label>
 							<Input
@@ -61,7 +63,7 @@ function Signin() {
 						</FormGroup>
 						<div className='flex-col flex justify-between items-center'>
 							<Button
-								className='mt-4 bg-gray-700 text-black	w-24'
+								className='mt-4 bg-white text-black	w-24'
 								onClick={handleLogin}
 								type='submit'
 								value='Sign in'>
@@ -69,7 +71,9 @@ function Signin() {
 							</Button>
 						</div>
 					</Form>
-					<Button className='mt-4 mx-auto text-black	mb-4 w-24' href='/register'>
+					<Button
+						className='mt-4 mx-auto bg-gray text-black	mb-4 w-24'
+						href='/register'>
 						Register
 					</Button>
 				</Card>

@@ -9,7 +9,7 @@ function Rank() {
 
 	return (
 		<>
-			<div className='pt-12 flex justify-center z-30'>
+			<div className='pt-12 flex justify-center z-30 px-3'>
 				<div className='text-3xl text-white z-30'>
 					{`${auth.user.name}, your current entry count is...`}
 				</div>

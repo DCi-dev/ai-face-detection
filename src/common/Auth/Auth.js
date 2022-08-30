@@ -22,7 +22,9 @@ export const AuthProvider = ({ children }) => {
 		});
 
 		const data = await response.json();
-		setUser(data);
+		if (data.id) {
+			return setUser(data);
+		}
 	};
 
 	const register = async (name, email, password) => {
@@ -39,7 +41,9 @@ export const AuthProvider = ({ children }) => {
 		});
 
 		const data = await response.json();
-		setUser(data);
+		if (data.id) {
+			setUser(data);
+		}
 	};
 
 	const logout = () => {
