@@ -2,7 +2,7 @@
 # Smart Brain Web App - AI face detection in images
 
 This project is based on the # Zero To Mastery - Smart Brain App, with the addition of TailwindCSS and the newer versions of React Hooks.
-Because of this, I tried a different approach for fetching the API data, the one presented in the Clarifai Docs for JavaScript (REST).
+Because of this, I tried a different approach for fetching the API data, the one presented in the Clarifai Docs for Node gRPC - by using our back-end.
 Face Detection Web App will use PERN stack.
 
 ## Functionality
