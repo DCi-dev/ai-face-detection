@@ -22,7 +22,7 @@ function Dashboard() {
 
 	const onButtonSubmit = () => {
 		setImageUrl(input);
-		fetch("http://localhost:3000/imageurl", {
+		fetch("https://ai-face-detection-api-production.up.railway.app/imageurl", {
 			method: "post",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({
@@ -32,13 +32,16 @@ function Dashboard() {
 			.then((response) => response.json())
 			.then((response) => {
 				if (response) {
-					fetch("http://localhost:3000/image", {
-						method: "put",
-						headers: { "Content-Type": "application/json" },
-						body: JSON.stringify({
-							id: auth.user.id,
-						}),
-					})
+					fetch(
+						"https://ai-face-detection-api-production.up.railway.app/image",
+						{
+							method: "put",
+							headers: { "Content-Type": "application/json" },
+							body: JSON.stringify({
+								id: auth.user.id,
+							}),
+						}
+					)
 						.then((response) => response.json())
 						.then((count) => {
 							auth.entries(Object.assign(auth.user, { entries: count }));

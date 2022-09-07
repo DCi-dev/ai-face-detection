@@ -10,16 +10,19 @@ export const AuthProvider = ({ children }) => {
 	};
 
 	const login = async (signInEmail, signInPassword) => {
-		const response = await fetch("http://localhost:3000/signin", {
-			method: "post",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({
-				email: signInEmail,
-				password: signInPassword,
-			}),
-		});
+		const response = await fetch(
+			"https://ai-face-detection-api-production.up.railway.app/signin",
+			{
+				method: "post",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					email: signInEmail,
+					password: signInPassword,
+				}),
+			}
+		);
 
 		const data = await response.json();
 		if (data.id) {
@@ -28,17 +31,20 @@ export const AuthProvider = ({ children }) => {
 	};
 
 	const register = async (name, email, password) => {
-		const response = await fetch("http://localhost:3000/register", {
-			method: "post",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({
-				name: name,
-				email: email,
-				password: password,
-			}),
-		});
+		const response = await fetch(
+			"https://ai-face-detection-api-production.up.railway.app/register",
+			{
+				method: "post",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					name: name,
+					email: email,
+					password: password,
+				}),
+			}
+		);
 
 		const data = await response.json();
 		if (data.id) {
